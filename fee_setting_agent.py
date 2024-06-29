@@ -177,7 +177,8 @@ def reward_function_per_channel(chan_id, forwarding_events):
         print(f"  Total fees: {total_fees}")
         print(f"  Total volume: {total_volume}")
 
-    reward = total_fees + (total_volume / 1000)  # Normalizing volume
+    reward = total_fees + (total_volume / 10000)  # Normalizing volume with a factor of 10000
+    print(f"  Calculated reward: {reward}")
     return reward
 
 # Function to collect and save data
