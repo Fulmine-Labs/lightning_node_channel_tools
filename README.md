@@ -61,19 +61,59 @@ See the [CHANGELOG.md](CHANGELOG.md) file for details about this version.
 
 * Install Anaconda, create an environment and install the dependencies in requirements.txt
 * Obtain all Files and folders from this repository from github
-* ... more coming
+* These parameters can be modified in rebalance.py
+  
+  max_fee = 150             # Initial fee limit, in satoshis. Align with the invoice_size below.
+  
+  invoice_size = 500000     # Size of the invoice to create for rebalancing, in satoshis. Suggest 5-10% of your average channel size. Lower will succeed more often.
+  
+  force = "--force"         # Force the payment to be sent, even if it is risky
+  
+  timeout = "15s"           # Timeout for each payment attempt
+  
+  fee_increment = 10        # Increment value for fee limit if rebalancing fails for all unbalanced channels, in satoshis
+  
+  fee_decrement = 5         # Decrement value for fee limit if rebalancing succeeds on any unbalanced channel, in satoshis
+  
+  TOLERABLE_HIGH_RATIO = 3      # Local/remote ratio above which a channel is considered overbalanced locally - 1 is ideal
+  
+  TOLERABLE_LOW_RATIO = 0.33    # Local/remote ratio below which a channel is considered underbalanced locally - 1 is ideal
+  
+  SUCCEEDED_MAX = 20            # Maximum number of successful rebalances in total (limit your total spend)
+  
+  ATTEMPTED_MAX = 250           # Maximum number of rebalance attempts for all unbalanced channel pairs
+  
+* These parameters can be modified in fee_setting_agent.py
+
+  DEBUG = True               # write copious output for troubleshooting
+  
+  PROMPT = True              # Set this to False to disable user prompts for unattended execution
+  
+  QTABLE = True              # Set to True to use Q-Learning, False to use rule-based adjustments. Suggest running for a few days set to False.
+  
+  LNCLI_PATH = "/usr/local/bin/lncli"  # Adjust this path as necessary for your LND installation
+  
+  AGGREGATION_DAYS = 7       # Number of days to aggregate forwarding history, when determining if there is more inbound or outbound traffic
+  
+  DATA_FILE = "fee_adjustment_data.csv"  # File to store data for AI training and trend analysis
+  
+* Run from the command line, (setting DEBUG To True and Prompt to True for fee_setting_agent.py) to ensure that the scripts are behaving as expected: _python script_name.py_
+* Once working, these scripts can be from a cron job, and log output for troubleshooting, using 'crontab -e'. Cron entries might look something like this:
+      - update required
+* The trend analysis script can be run as _python analyze_fee_adjustments.py_. It expects the CSV file _fee_adjustment_data.csv_ to be present in the local folder and will create a plot called _difference_in_cumulative_reward_between_runs.png_
 
 ## Testing
 
 The rebalance.py script has been tested for several weeks. It will sometimes find a sweet spot and rebalance a number of times in one run, for an average fee of around 400 sats for 1M sats rebalanced. Sometimes it will not rebalance any channels.
 
-The fee_setting_agent.py script has only run for a few days. Initial fee setting bugs seem to have been ironed out, but it is still very much in POC.
+The fee_setting_agent.py script has only run for a few days, at this time. Initial fee setting bugs seem to have been ironed out, but it is still very much in POC.
 
 Feedback is welcome on both.
 
-## Known issues
+## Known issues and roadmap
 
 * Eventually the Q-learning should also vary the size of the increment/decrement
+* Ignoring fees to open channels or replace hardware, for a node, profit = routing fees - rebalancing fees. Therefore a future version of the Q-learning script could include the rebalancing fees/parameters in the reward/actions
 
 ## Acknowledgements
 
