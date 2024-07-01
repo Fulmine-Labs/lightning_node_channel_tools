@@ -19,7 +19,7 @@ fee_decrement = 5         # Decrement value for fee limit if rebalancing succeed
 TOLERABLE_HIGH_RATIO = 3      # Ratio above which a channel is considered overbalanced locally
 TOLERABLE_LOW_RATIO = 0.33    # Ratio below which a channel is considered underbalanced locally
 
-SUCCEEDED_MAX = 200           # Maximum number of successful rebalances
+SUCCEEDED_MAX = 20            # Maximum number of successful rebalances
 ATTEMPTED_MAX = 250           # Maximum number of rebalance attempts
 
 SUCCEEDED_COUNT = 0           # Counter for successful rebalances
