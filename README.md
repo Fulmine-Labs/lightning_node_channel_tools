@@ -106,14 +106,14 @@ See the [CHANGELOG.md](CHANGELOG.md) file for details about this version.
 
 The rebalance.py script has been tested for several weeks. It will sometimes find a sweet spot and rebalance a number of times in one run, for an average fee of around 400 sats for 1M sats rebalanced. Sometimes it will not rebalance any channels.
 
-The fee_setting_agent.py script has only run for a few days, at this time. Initial fee setting bugs seem to have been ironed out, but it is still very much in POC. My best guess is that the rule-based mode is directionally good, but the Q-learning mode needs work.
+The fee_setting_agent.py script has only run for a few days, at this time. Initial fee setting bugs seem to have been ironed out, but it is still very much in POC. My best guess from initial observations, is that the rule-based mode is directionally good, but the Q-learning mode needs work.
 
 Feedback is welcome on both.
 
 ## Known issues and roadmap
 
 * Eventually the Q-learning should also vary the size of the increment/decrement
-* Ignoring fees to open channels or replace hardware, for a node, profit = routing fees - rebalancing fees. Therefore a future version of the Q-learning script could include the rebalancing fees/parameters in the reward/actions
+* Ignoring fees to open channels or replace hardware, for a node, _profit = routing fees - rebalancing fees_. Therefore a future version of the Q-learning script could include the rebalancing fees/parameters in the reward/actions
 
 ## Acknowledgements
 
