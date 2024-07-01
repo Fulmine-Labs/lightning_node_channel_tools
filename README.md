@@ -106,7 +106,7 @@ See the [CHANGELOG.md](CHANGELOG.md) file for details about this version.
 
 The rebalance.py script has been tested for several weeks. It will sometimes find a sweet spot and rebalance a number of times in one run, for an average fee of around 400 sats for 1M sats rebalanced. Sometimes it will not rebalance any channels.
 
-The fee_setting_agent.py script has only run for a few days, at this time. Initial fee setting bugs seem to have been ironed out, but it is still very much in POC.
+The fee_setting_agent.py script has only run for a few days, at this time. Initial fee setting bugs seem to have been ironed out, but it is still very much in POC. My best guess is that the rule-based mode is directionally good, but the Q-learning mode needs work.
 
 Feedback is welcome on both.
 
